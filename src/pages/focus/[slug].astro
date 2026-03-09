@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ActivityCard from '../../components/ActivityCard.astro';
+import { calendar, getActivity } from '../../data/calendar';
+import type { FocusArea } from '../../data/calendar';
+import { withBase } from '../../lib/utils';
+
+export function getStaticPaths() {
+  return calendar.focusAreas.map((focusArea) => ({
+    params: { slug: focusArea.slug },
+    props: { focusArea }
+  }));
+}
+
+const { focusArea } = Astro.props as { focusArea: FocusArea };
+const activities = focusArea.activityIds.map((id) => getActivity(id));
+---
+
+<BaseLayout title={focusArea.title} description={focusArea.intro}>
+  <section class="panel">
+    <div class="section-heading">
+      <p class="section-heading__eyebrow">Browse by feel</p>
+      <h1 class="week-page__headline">{focusArea.title}</h1>
+      <p>{focusArea.intro}</p>
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="activity-grid">
+      {activities.map((activity) => (
+        <ActivityCard activity={activity} />
+      ))}
+    </div>
+  </section>
+
+  <section class="section-block">
+    <p>
+      <a class="button-link" href={withBase('/#simple-to-browse')}>Back to home</a>
+    </p>
+  </section>
+</BaseLayout>

@@ -32,6 +32,54 @@
       "Let the site still feel complete even when a real venue image has not been added yet."
     ]
   },
+  "focusAreas": [
+    {
+      "slug": "nervous-system-downshift",
+      "title": "Nervous-system downshift",
+      "description": "Massage, sound, sauna, and slow indoor calm.",
+      "intro": "Quiet, lower-stimulation ideas for days that call for warmth, softness, and a little less effort.",
+      "activityIds": [
+        "barnham-winter-warmer",
+        "yantra-sunday-sounds",
+        "sauna-next-the-sea",
+        "yantra-yin-sounds",
+        "sainsbury-centre",
+        "barnham-file-polish"
+      ]
+    },
+    {
+      "slug": "soft-distraction",
+      "title": "Soft distraction",
+      "description": "Food, making, art, flowers, animals, and low-stakes novelty.",
+      "intro": "A gentle change of focus through beauty, texture, or company, without needing much social energy.",
+      "activityIds": [
+        "ora-plantation",
+        "willow-gallery-ceramics",
+        "mj-caistor-lunch",
+        "norfolk-mead-flowers",
+        "helgate-hand-building",
+        "shiki-japanese",
+        "alpaca-trekking",
+        "bure-valley-railway"
+      ]
+    },
+    {
+      "slug": "nature-and-water",
+      "title": "Nature and water",
+      "description": "Estates, beaches, paddling, broad sky, and quiet movement.",
+      "intro": "Open-air choices for when a little landscape, water, or horizon would feel steadier than staying indoors.",
+      "activityIds": [
+        "blickling-estate",
+        "felbrigg-estate",
+        "pensthorpe",
+        "sheringham-park",
+        "go-paddle-horning",
+        "salhouse-broad-paddle",
+        "wells-holkham-beach",
+        "sauna-next-the-sea"
+      ]
+    }
+  ],
   "weeks": [
     {
       "id": "week-01",

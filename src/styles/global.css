@@ -439,6 +439,21 @@ a:focus-visible {
   border-color: rgba(255, 255, 255, 0.78);
 }
 
+.overview-card {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 0.9rem;
+  overflow: hidden;
+  min-height: 100%;
+  padding: 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  color: inherit;
+  text-decoration: none;
+}
+
 .overview-grid article::before {
   content: "";
   position: absolute;
@@ -447,31 +462,39 @@ a:focus-visible {
   pointer-events: none;
 }
 
-.overview-grid article:nth-child(1) {
+.overview-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.overview-card:nth-child(1) {
   background: linear-gradient(180deg, rgba(249, 241, 236, 0.94), rgba(244, 233, 227, 0.88));
 }
 
-.overview-grid article:nth-child(1)::before {
+.overview-card:nth-child(1)::before {
   background:
     radial-gradient(circle at top right, rgba(234, 217, 210, 0.5), transparent 38%),
     linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 55%);
 }
 
-.overview-grid article:nth-child(2) {
+.overview-card:nth-child(2) {
   background: linear-gradient(180deg, rgba(248, 244, 237, 0.94), rgba(239, 231, 220, 0.88));
 }
 
-.overview-grid article:nth-child(2)::before {
+.overview-card:nth-child(2)::before {
   background:
     radial-gradient(circle at top right, rgba(232, 223, 209, 0.5), transparent 40%),
     linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 58%);
 }
 
-.overview-grid article:nth-child(3) {
+.overview-card:nth-child(3) {
   background: linear-gradient(180deg, rgba(241, 246, 244, 0.95), rgba(227, 236, 234, 0.9));
 }
 
-.overview-grid article:nth-child(3)::before {
+.overview-card:nth-child(3)::before {
   background:
     radial-gradient(circle at top right, rgba(171, 196, 194, 0.28), transparent 38%),
     linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 55%);
@@ -489,9 +512,23 @@ a:focus-visible {
 }
 
 .overview-grid h3,
-.overview-grid p {
+.overview-grid p,
+.overview-card__link {
   position: relative;
   z-index: 1;
+}
+
+.overview-card__link {
+  margin-top: auto;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.overview-card:hover .overview-card__link,
+.overview-card:focus-visible .overview-card__link {
+  color: var(--ink);
 }
 
 .highlight-grid {

@@ -54,6 +54,14 @@ export type Category = {
   activityIds: string[];
 };
 
+export type FocusArea = {
+  slug: string;
+  title: string;
+  description: string;
+  intro: string;
+  activityIds: string[];
+};
+
 export type PairedOuting = {
   title: string;
   description: string;
@@ -80,6 +88,7 @@ export type CalendarData = {
     modes: string[];
     principles: string[];
   };
+  focusAreas: FocusArea[];
   weeks: Week[];
   activities: Activity[];
   categories: Category[];
@@ -107,6 +116,7 @@ export const imageManifest = rawImageManifest as {
 
 export const activityMap = new Map(calendar.activities.map((activity) => [activity.id, activity]));
 export const categoryMap = new Map(calendar.categories.map((category) => [category.slug, category]));
+export const focusAreaMap = new Map(calendar.focusAreas.map((focusArea) => [focusArea.slug, focusArea]));
 
 export function getActivity(id: string) {
   const activity = activityMap.get(id);
@@ -118,4 +128,12 @@ export function getActivity(id: string) {
 
 export function getWeekActivities(week: Week) {
   return [getActivity(week.anchorActivityId), getActivity(week.secondActivityId)];
+}
+
+export function getFocusArea(slug: string) {
+  const focusArea = focusAreaMap.get(slug);
+  if (!focusArea) {
+    throw new Error(`Missing focus area: ${slug}`);
+  }
+  return focusArea;
 }

@@ -99,23 +99,19 @@ const heroImageSrc = withBase('/images/venues/salhouse-broad-paddle.jpg');
   </section>
 
   <section class="section-block">
-    <div class="section-heading">
+    <div class="section-heading" id="simple-to-browse">
       <p class="section-heading__eyebrow">How it works</p>
       <h2>Simple to browse</h2>
       <p>Each week gives one easy midweek idea and one weekend option.</p>
     </div>
     <div class="overview-grid">
-      {calendar.designLogic.modes.map((item) => {
-        const [title, ...rest] = item.split(':');
-        const description = rest.join(':').trim();
-
-        return (
-          <article>
-            <h3>{title}</h3>
-            <p>{description}</p>
-          </article>
-        );
-      })}
+      {calendar.focusAreas.map((focusArea) => (
+        <a class="overview-card" href={withBase(`/focus/${focusArea.slug}/`)}>
+          <h3>{focusArea.title}</h3>
+          <p>{focusArea.description}</p>
+          <span class="overview-card__link">View ideas</span>
+        </a>
+      ))}
     </div>
   </section>
 
