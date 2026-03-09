@@ -12,6 +12,17 @@ export function getActivityHref(activityId: string) {
   return withBase(`/activities/${activityId}/`);
 }
 
+type ActivitySummaryInput = {
+  activityName: string;
+  venueName: string;
+  location?: string;
+};
+
+export function getActivityOverview(activity: ActivitySummaryInput) {
+  const location = activity.location ? ` in ${activity.location}` : '';
+  return `${activity.activityName} at ${activity.venueName}${location}.`;
+}
+
 export function getGoogleMapsSearchHref(query: string) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }

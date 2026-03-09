@@ -908,6 +908,26 @@ a:focus-visible {
   border-top: 1px solid var(--line);
 }
 
+.activity-card__subtitle,
+.activity-card__summary,
+.activity-page__location,
+.activity-page__feel,
+.activity-page__summary-label,
+.activity-page__summary-text {
+  margin: 0;
+}
+
+.activity-card__subtitle {
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.activity-card__summary {
+  color: var(--ink);
+  line-height: 1.55;
+}
+
 .activity-card__footer {
   display: grid;
   gap: 0.8rem;
@@ -992,6 +1012,42 @@ a:focus-visible {
   font-family: var(--serif);
   font-size: clamp(1.3rem, 3vw, 1.75rem);
   line-height: 1.15;
+}
+
+.activity-page__location {
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+
+.activity-page__summary-stack {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.activity-page__summary-card {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.activity-page__summary-label {
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.activity-page__summary-text {
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+.activity-page__feel {
+  color: var(--ink-soft);
+  font-size: 0.96rem;
 }
 
 .activity-page__link-row,

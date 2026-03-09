@@ -3,7 +3,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import TagPills from '../../components/TagPills.astro';
 import type { Activity } from '../../data/calendar';
 import { calendar } from '../../data/calendar';
-import { getActivityMapsTarget, getGoogleMapsSearchHref, withBase } from '../../lib/utils';
+import {
+  getActivityMapsTarget,
+  getActivityOverview,
+  getGoogleMapsSearchHref,
+  withBase
+} from '../../lib/utils';
 
 export function getStaticPaths() {
   return calendar.activities.map((activity) => ({
@@ -15,6 +20,7 @@ export function getStaticPaths() {
 const { activity } = Astro.props as { activity: Activity };
 const imageSrc = activity.image?.src ? withBase(activity.image.src) : undefined;
 const googleMapsHref = getGoogleMapsSearchHref(getActivityMapsTarget(activity.venueName, activity.location));
+const activityOverview = getActivityOverview(activity);
 const relatedWeeks = calendar.weeks.filter(
   (week) => week.anchorActivityId === activity.id || week.secondActivityId === activity.id
 );
@@ -58,7 +64,20 @@ const backLabel = relatedWeeks[0]
       <div class="activity-page__intro">
         <h1 class="week-page__headline">{activity.activityName}</h1>
         <p class="activity-page__venue">{activity.venueName}</p>
-        <p class="week-page__lede">{activity.whyItSuitsHer}</p>
+        <p class="activity-page__location">{activity.location}</p>
+
+        <div class="activity-page__summary-stack">
+          <article class="activity-page__summary-card">
+            <p class="activity-page__summary-label">What it is</p>
+            <p class="activity-page__summary-text">{activityOverview}</p>
+          </article>
+          <article class="activity-page__summary-card">
+            <p class="activity-page__summary-label">Why it feels good</p>
+            <p class="activity-page__summary-text">{activity.whyItSuitsHer}</p>
+          </article>
+        </div>
+
+        <p class="activity-page__feel">Feels like: {activity.emotionalFit}</p>
         <TagPills tags={activity.tags} />
 
         <div class="activity-page__link-row">
@@ -87,7 +106,7 @@ const backLabel = relatedWeeks[0]
   <section class="section-block">
     <div class="activity-page__notes">
       <article class="callout">
-        <h2>Why it fits</h2>
+        <h2>Why it helps</h2>
         <p>{activity.whyThisMightHelpThisWeek}</p>
         {activity.notes && <p>{activity.notes}</p>}
       </article>

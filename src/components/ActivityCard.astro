@@ -1,6 +1,11 @@
 ---
 import type { Activity } from '../data/calendar';
-import { getActivityHref, getActivityMapsTarget, getGoogleMapsSearchHref, withBase } from '../lib/utils';
+import {
+  getActivityHref,
+  getActivityMapsTarget,
+  getGoogleMapsSearchHref,
+  withBase
+} from '../lib/utils';
 import TagPills from './TagPills.astro';
 
 interface Props {
@@ -15,7 +20,7 @@ const isPlaceholderImage = activity.image?.src?.includes('/images/placeholders/'
 const activityHref = getActivityHref(activity.id);
 const googleMapsHref = getGoogleMapsSearchHref(getActivityMapsTarget(activity.venueName, activity.location));
 const keyFacts = [
-  { label: 'Venue', value: activity.venueName },
+  { label: 'Drive time', value: activity.driveTimeFromMarsham },
   { label: 'Quiet time', value: activity.bestQuietTime },
   { label: 'Spend', value: activity.estimatedCost },
   { label: 'Best with', value: activity.soloFriendBoyfriendFit }
@@ -41,6 +46,10 @@ const keyFacts = [
 
   <div class="activity-card__body">
     <h3 class="activity-card__title">{activity.activityName}</h3>
+    <p class="activity-card__subtitle">
+      {activity.venueName} · {activity.location}
+    </p>
+    <p class="activity-card__summary">{activity.whyItSuitsHer}</p>
 
     <TagPills tags={activity.tags} />
 
@@ -54,7 +63,7 @@ const keyFacts = [
     </dl>
 
     <div class="activity-card__reflection">
-      <p class="activity-card__reflection-label">Why it fits</p>
+      <p class="activity-card__reflection-label">{cardTitle ? 'Why this week' : 'Why it helps'}</p>
       <p>{activity.whyThisMightHelpThisWeek}</p>
     </div>
 
