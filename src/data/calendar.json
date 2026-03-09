@@ -187,7 +187,7 @@
       "anchorActivityId": "salhouse-broad-paddle",
       "secondLabel": "Weekend treat",
       "secondActivityId": "wildebeest-lunch",
-      "summary": "Still water for emotional space, followed by a true end-of-month lunch that feels considered and contained."
+      "summary": "Still water for quiet space, followed by a true end-of-month lunch that feels considered and contained."
     }
   ],
   "activities": [
@@ -310,7 +310,7 @@
     {
       "id": "barnham-winter-warmer",
       "activityName": "Winter Warmer spa treatment",
-      "whyItSuitsHer": "Physical care with emotional payoff, in a time-bounded format that feels manageable.",
+      "whyItSuitsHer": "Physical care with restorative value, in a time-bounded format that feels manageable.",
       "venueName": "Barnham Broom Hotel - Golf & Spa",
       "location": "Barnham Broom, Norfolk",
       "driveTimeFromMarsham": "35 to 45 minutes",
@@ -397,7 +397,7 @@
     {
       "id": "sauna-next-the-sea",
       "activityName": "Sea-view sauna session",
-      "whyItSuitsHer": "Heat, horizon, and an elemental setting can help emotions move through without words.",
+      "whyItSuitsHer": "Heat, horizon, and an elemental setting offer warmth, sea air, and a clear change of scene.",
       "venueName": "Sauna Next The Sea",
       "location": "Wells-next-the-Sea, Norfolk",
       "driveTimeFromMarsham": "40 to 50 minutes",
@@ -408,7 +408,7 @@
       "soloFriendBoyfriendFit": "Solo, friend, or boyfriend",
       "bookingLink": "https://www.saunanextthesea.co.uk/book-online",
       "sourceName": "Sauna Next The Sea booking page",
-      "whyThisMightHelpThisWeek": "It is a clean state change from numb or overwhelmed to grounded.",
+      "whyThisMightHelpThisWeek": "It is a clean state change from tense to more settled.",
       "emotionalFit": "Strongest state-shift, cleansing, elemental.",
       "likelyCrowdLevel": "Shared sessions are quiet by design, up to 5 others",
       "bookingNeeded": "Yes",
@@ -437,7 +437,7 @@
       "soloFriendBoyfriendFit": "Solo, friend, or boyfriend",
       "bookingLink": "https://www.mjpatcaistorhall.co.uk/menu",
       "sourceName": "Mark Poynton at Caistor Hall menu",
-      "whyThisMightHelpThisWeek": "It creates a normal-life moment that still feels special, which can be stabilising during a demanding season.",
+      "whyThisMightHelpThisWeek": "It creates a normal-life moment that still feels special, which can be a pleasant midweek treat.",
       "emotionalFit": "Special without being theatrical.",
       "likelyCrowdLevel": "Low-moderate at lunch",
       "bookingNeeded": "Yes",
@@ -611,7 +611,7 @@
       "soloFriendBoyfriendFit": "Solo, friend, or boyfriend",
       "bookingLink": "https://sainsburycentre.ac.uk/visit-us/",
       "sourceName": "Sainsbury Centre visit page",
-      "whyThisMightHelpThisWeek": "It provides mental distance from caregiving without sensory overload.",
+      "whyThisMightHelpThisWeek": "It offers a quiet change of scene without sensory overload.",
       "emotionalFit": "Quiet, spacious, and intellectually gentle.",
       "likelyCrowdLevel": "Low to moderate, calmer midweek",
       "bookingNeeded": "Not usually for standard entry",
@@ -619,7 +619,7 @@
         "src": "/images/placeholders/studio.svg",
         "alt": "A soft placeholder with gallery walls, sculptural forms, and airy light."
       },
-      "notes": "Reliable indoor fallback for poor weather or emotionally fragile days.",
+      "notes": "Reliable indoor fallback for poor weather or low-energy days.",
       "tags": ["Wednesday", "indoor", "art", "under-£40"],
       "season": "Spring",
       "indoor": true,
@@ -658,7 +658,7 @@
     {
       "id": "pensthorpe",
       "activityName": "Birds, gardens, and gentle walking",
-      "whyItSuitsHer": "Nature that feels curated and safe, with indoor fallback options if she wakes up fragile.",
+      "whyItSuitsHer": "Nature that feels curated and safe, with indoor fallback options if she wakes up low-energy.",
       "venueName": "Pensthorpe Natural Park",
       "location": "Near Fakenham, Norfolk",
       "driveTimeFromMarsham": "35 to 45 minutes",
@@ -727,7 +727,7 @@
       "soloFriendBoyfriendFit": "Solo, friend, boyfriend, or with the dog",
       "bookingLink": "https://www.burevalleyrailway.co.uk/plan-your-trip/ticket-prices/",
       "sourceName": "Bure Valley Railway ticket prices",
-      "whyThisMightHelpThisWeek": "It is a safe, low-effort way to feel out in the world again.",
+      "whyThisMightHelpThisWeek": "It is a safe, low-effort way to enjoy a simple outing with very low effort.",
       "emotionalFit": "Novel but comforting, with almost no effort required.",
       "likelyCrowdLevel": "Low to moderate midweek, busier on event days",
       "bookingNeeded": "Recommended",
@@ -756,7 +756,7 @@
       "soloFriendBoyfriendFit": "Solo, friend, boyfriend, or with the dog",
       "bookingLink": "https://www.holkham.co.uk/visit/wells-next-the-sea-beach/",
       "sourceName": "Holkham Wells-next-the-Sea beach visitor info",
-      "whyThisMightHelpThisWeek": "The sea can hold big feelings without demanding words.",
+      "whyThisMightHelpThisWeek": "The coast offers space, air, and an easy rhythm.",
       "emotionalFit": "Spacious, cleansing, and emotionally permissive.",
       "likelyCrowdLevel": "Low early, higher at midday in good weather",
       "bookingNeeded": "No",
@@ -785,7 +785,7 @@
       "soloFriendBoyfriendFit": "Friend or boyfriend, also solo if bookings allow",
       "bookingLink": "https://alpacatrekking.co.uk/",
       "sourceName": "Alpaca Trekking official site",
-      "whyThisMightHelpThisWeek": "It offers connection without emotional labour.",
+      "whyThisMightHelpThisWeek": "It offers gentle company without pressure.",
       "emotionalFit": "Warm, lightly playful, and unexpectedly soothing.",
       "likelyCrowdLevel": "Small guided group",
       "bookingNeeded": "Yes",
@@ -843,7 +843,7 @@
       "soloFriendBoyfriendFit": "Solo by kayak, or friend/boyfriend by canoe",
       "bookingLink": "https://www.salhousebroad.org.uk/canoehire.html?srsltid=AfmBOorSuV6NM1DhRzAPS7stS9SqbPDXl13SnnKG-p-syzIv_lgmrCjc",
       "sourceName": "Salhouse Broad canoe hire",
-      "whyThisMightHelpThisWeek": "Being on still water can feel like emotional space without needing to talk.",
+      "whyThisMightHelpThisWeek": "Being on still water can feel like quiet space with no pressure to make conversation.",
       "emotionalFit": "Very low-pressure, calm, and spacious.",
       "likelyCrowdLevel": "Low midweek with minimal boat traffic in low season",
       "bookingNeeded": "Available to book via calendar",
@@ -872,7 +872,7 @@
       "soloFriendBoyfriendFit": "Friend or boyfriend, also solo for a deliberate treat",
       "bookingLink": "https://www.thewildebeest.co.uk/7coursetaster",
       "sourceName": "The Wildebeest taster lunch page",
-      "whyThisMightHelpThisWeek": "It can mark the end of a difficult month with something contained and high quality.",
+      "whyThisMightHelpThisWeek": "It can round off the month with a well-made lunch that feels contained and high quality.",
       "emotionalFit": "Intentional, absorbing, and quietly celebratory.",
       "likelyCrowdLevel": "Moderate, but lunch is calmer than evening",
       "bookingNeeded": "Yes",
@@ -1125,7 +1125,7 @@
       "slug": "backups",
       "title": "Backup ideas",
       "shortTitle": "Backups",
-      "description": "Quiet, midweek-friendly or low-pressure alternatives for fragile weeks, poor weather, or late plan changes.",
+      "description": "Quiet, midweek-friendly or low-pressure alternatives for low-energy weeks, poor weather, or late plan changes.",
       "activityIds": [
         "norfolk-melting-pot-wax",
         "norfolk-melting-pot-candle",
@@ -1156,7 +1156,7 @@
       "slug": "around-80",
       "title": "Around £80 treats",
       "shortTitle": "£80 treats",
-      "description": "Occasional higher-spend outings with strong emotional payoff and a premium feel.",
+      "description": "Occasional higher-spend outings with strong restorative value and a premium feel.",
       "activityIds": [
         "norfolk-mead-flowers",
         "alpaca-trekking",
@@ -1182,7 +1182,7 @@
       "slug": "indoor",
       "title": "Weather-proof indoor options",
       "shortTitle": "Indoor",
-      "description": "Quiet indoor plans for rain, overwhelm, or days when the emotional cost of a bigger outing is too high.",
+      "description": "Quiet indoor plans for rain, overwhelm, or days when a bigger outing feels like more effort than the day calls for.",
       "activityIds": [
         "sainsbury-centre",
         "helgate-hand-building",
@@ -1255,7 +1255,7 @@
   "pairedOutings": [
     {
       "title": "Sea sauna, then something warm",
-      "description": "Book the sauna first, then let the second stop be a warm drink or short shoreline wander so the outing ends softly rather than abruptly.",
+      "description": "Book the sauna first, then let the second stop be a warm drink or short shoreline wander so the outing finishes in an easy, unhurried way.",
       "activityIds": [
         "sauna-next-the-sea",
         "wells-holkham-beach"
@@ -1273,7 +1273,7 @@
         "williams-kitchen"
       ],
       "format": "same-day",
-      "whyItWorks": "A second stop creates a softer landing and stops the good part of the day ending too suddenly."
+      "whyItWorks": "A second stop helps the day finish in an easy, unhurried way."
     },
     {
       "title": "Sheltered paddle, then plant browsing",
