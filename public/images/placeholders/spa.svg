@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Spa placeholder">
+  <rect width="1200" height="900" fill="#f3eee8"/>
+  <rect x="140" y="220" width="920" height="460" rx="60" fill="#fbf7f2"/>
+  <rect x="210" y="500" width="780" height="120" rx="32" fill="#d7e5e4"/>
+  <circle cx="360" cy="392" r="62" fill="#ead8d0"/>
+  <circle cx="840" cy="392" r="88" fill="#dfe8dc"/>
+</svg>

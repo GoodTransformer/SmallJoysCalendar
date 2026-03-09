@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ActivityCard from '../../components/ActivityCard.astro';
+import PairedOutingCard from '../../components/PairedOutingCard.astro';
+import { calendar, getActivity } from '../../data/calendar';
+import { withBase } from '../../lib/utils';
+
+export function getStaticPaths() {
+  return calendar.categories.map((category) => ({
+    params: { slug: category.slug },
+    props: { category }
+  }));
+}
+
+const { category } = Astro.props;
+const activities = category.activityIds.map((id) => getActivity(id));
+const isWaterCategory = category.slug === 'water-based';
+const isPairedCategory = category.slug === 'paired-outings';
+const pairedOutings = isPairedCategory
+  ? calendar.pairedOutings.map((item) => ({
+      ...item,
+      activities: (item.activityIds ?? []).map((id) => getActivity(id))
+    }))
+  : [];
+const sameDayPairs = pairedOutings.filter((item) => item.format !== 'split-across-days').length;
+const splitAcrossPairs = pairedOutings.filter((item) => item.format === 'split-across-days').length;
+---
+
+<BaseLayout title={category.title} description={category.description}>
+  <section class="panel">
+    {isPairedCategory ? (
+      <>
+        <div class="section-heading">
+          <h1 class="week-page__headline">{category.title}</h1>
+          <p>Simple two-part plans that still feel light.</p>
+        </div>
+
+        <div class="paired-summary">
+          <article class="paired-summary__item">
+            <p class="paired-summary__label">Same day</p>
+            <p class="paired-summary__value">{sameDayPairs}</p>
+            <p class="paired-summary__note">Two stops in one easy outing.</p>
+          </article>
+          <article class="paired-summary__item">
+            <p class="paired-summary__label">Across the week</p>
+            <p class="paired-summary__value">{splitAcrossPairs}</p>
+            <p class="paired-summary__note">Split into two smaller moments.</p>
+          </article>
+        </div>
+      </>
+    ) : (
+      <div class="section-heading">
+        <h1 class="week-page__headline">{category.title}</h1>
+        <p>{category.description}</p>
+      </div>
+    )}
+  </section>
+
+  {isPairedCategory ? (
+    <section class="section-block">
+      <div class="paired-grid">
+        {pairedOutings.map((item) => (
+          <PairedOutingCard item={item} activities={item.activities} />
+        ))}
+      </div>
+    </section>
+  ) : (
+    <section class="section-block">
+      <div class="activity-grid">
+        {activities.map((activity) => (
+          <ActivityCard activity={activity} />
+        ))}
+      </div>
+    </section>
+  )}
+
+  {isWaterCategory && (
+    <section class="section-block">
+      <div class="callout">
+        <h2>Water choices, from gentlest to more active</h2>
+        <ol>
+          {calendar.waterBasedRanked.map((item) => (
+            <li>
+              <strong>{getActivity(item.activityId).activityName}.</strong> {item.note}
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )}
+
+  <section class="section-block">
+    <p>
+      <a class="button-link" href={withBase('/categories/')}>Back to all categories</a>
+    </p>
+  </section>
+</BaseLayout>

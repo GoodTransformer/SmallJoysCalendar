@@ -1,0 +1,175 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WeekPreview from '../components/WeekPreview.astro';
+import CategoryCard from '../components/CategoryCard.astro';
+import { calendar, getActivity } from '../data/calendar';
+import type { Week } from '../data/calendar';
+import { getActivityHref, withBase } from '../lib/utils';
+
+function formatJumpLabel(label: string) {
+  return label.replace(/\s+to\s+/g, ' - ');
+}
+
+function getMonthTitle(abbrev: string) {
+  const months = {
+    Mar: 'March',
+    Apr: 'April',
+    May: 'May'
+  };
+
+  return months[abbrev as keyof typeof months] ?? abbrev;
+}
+
+type JumpGroup = {
+  month: string;
+  weeks: Week[];
+};
+
+const jumpGroups = calendar.weeks.reduce<JumpGroup[]>((groups, week) => {
+  const startMonth = getMonthTitle(week.dateRange.split(' ')[0]);
+  const currentGroup = groups.at(-1);
+
+  if (!currentGroup || currentGroup.month !== startMonth) {
+    groups.push({ month: startMonth, weeks: [week] });
+    return groups;
+  }
+
+  currentGroup.weeks.push(week);
+  return groups;
+}, []);
+
+const highlightIds = ['alpaca-trekking', 'sauna-next-the-sea', 'mj-caistor-lunch'];
+const highlights = highlightIds.map((id) => {
+  const activity = getActivity(id);
+  const week = calendar.weeks.find(
+    (entry) => entry.anchorActivityId === id || entry.secondActivityId === id
+  );
+
+  if (!week) {
+    throw new Error(`Missing week for highlight activity: ${id}`);
+  }
+
+  return {
+    activity,
+    week,
+    imageSrc: activity.image?.src ? withBase(activity.image.src) : undefined
+  };
+});
+---
+
+<BaseLayout title="Home" description={calendar.site.description}>
+  <section class="hero">
+    <div class="hero__grid">
+      <div>
+        <p class="hero__eyebrow">For {calendar.site.recipientName ?? 'Rhi'}</p>
+        <p class="hero__context">Gentle, low-pressure, dog-friendly</p>
+        <h1>{calendar.site.title}</h1>
+        <p class="hero__lede">{calendar.site.intro}</p>
+      </div>
+
+      <div class="hero__panel">
+        <p class="section-heading__eyebrow">Quick jump</p>
+        <div class="hero__jump-groups">
+          {jumpGroups.map((group) => (
+            <section class="hero__jump-group" aria-label={group.month}>
+              <p class="hero__jump-month">{group.month}</p>
+              <ul class="hero__jump-list">
+                {group.weeks.map((week) => (
+                  <li>
+                    <a href={`#${week.id}`}>
+                      <span class="hero__jump-label">{formatJumpLabel(week.shortDateRange)}</span>
+                      <span class="hero__jump-icon" aria-hidden="true">↗</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="section-heading">
+      <p class="section-heading__eyebrow">How it works</p>
+      <h2>Simple to browse</h2>
+      <p>Each week gives one easy midweek idea and one weekend option.</p>
+    </div>
+    <div class="overview-grid">
+      {calendar.designLogic.modes.map((item) => {
+        const [title, ...rest] = item.split(':');
+        const description = rest.join(':').trim();
+
+        return (
+          <article>
+            <h3>{title}</h3>
+            <p>{description}</p>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="section-heading">
+      <p class="section-heading__eyebrow">A few highlights</p>
+      <h2>Three lovely things to look forward to</h2>
+      <p>Llamas, sea air and heat, and one very good lunch.</p>
+    </div>
+    <div class="highlight-grid">
+      {highlights.map(({ activity, week, imageSrc }) => (
+        <article class="highlight-card">
+          {imageSrc && (
+            <a class="highlight-card__image-link" href={getActivityHref(activity.id)} aria-label={`Open ${activity.activityName}`}>
+              <img
+                class="highlight-card__image"
+                src={imageSrc}
+                alt={activity.image?.alt ?? ''}
+                loading="lazy"
+              />
+            </a>
+          )}
+          <div class="highlight-card__body">
+            <p class="highlight-card__eyebrow">{week.label}</p>
+            <h3>{activity.activityName}</h3>
+            <p>{activity.whyItSuitsHer}</p>
+            <a href={withBase(`/weeks/${week.slug}/`)}>See {week.label.toLowerCase()}</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="section-heading">
+      <p class="section-heading__eyebrow">Twelve-week arc</p>
+      <h2>One small chapter at a time</h2>
+      <p>Open any week for the full details.</p>
+    </div>
+    <div class="week-list">
+      {calendar.weeks.map((week, index) => (
+        <WeekPreview
+          week={week}
+          anchor={getActivity(week.anchorActivityId)}
+          secondary={getActivity(week.secondActivityId)}
+          weekNumber={index + 1}
+          totalWeeks={calendar.weeks.length}
+        />
+      ))}
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="section-heading">
+      <p class="section-heading__eyebrow">Idea banks</p>
+      <h2>Browse by mood, budget, weather, or company</h2>
+      <p>Choose a simpler route in: backups, indoor days, dog-friendly plans, treats, or water.</p>
+    </div>
+    <div class="category-grid">
+      {calendar.categories.map((category) => (
+        <CategoryCard category={category} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,76 @@
+---
+import type { Activity, Week } from '../data/calendar';
+import { withBase } from '../lib/utils';
+import ProgressDots from './ProgressDots.astro';
+import TagPills from './TagPills.astro';
+
+interface Props {
+  week: Week;
+  anchor: Activity;
+  secondary: Activity;
+  weekNumber: number;
+  totalWeeks: number;
+}
+
+const { week, anchor, secondary, weekNumber, totalWeeks } = Astro.props;
+const anchorImageSrc = anchor.image?.src ? withBase(anchor.image.src) : undefined;
+const secondaryImageSrc = secondary.image?.src ? withBase(secondary.image.src) : undefined;
+---
+
+<section class="week-preview" id={week.id}>
+  <div class="week-preview__header">
+    <div class="week-preview__heading">
+      <p class="week-preview__kicker">{week.label}</p>
+      <h2>{week.dateRange}</h2>
+    </div>
+    <ProgressDots current={weekNumber} total={totalWeeks} />
+  </div>
+
+  <div class="week-preview__anchor">
+    <div class="week-preview__anchor-inner">
+      <div class="week-preview__anchor-copy">
+        <p class="week-preview__anchor-label">Wednesday option</p>
+        <h3>{anchor.activityName}</h3>
+        <p>{anchor.venueName}</p>
+        <TagPills tags={anchor.tags.slice(0, 3)} />
+      </div>
+      {anchorImageSrc && (
+        <img
+          class="week-preview__thumb week-preview__thumb--anchor"
+          src={anchorImageSrc}
+          alt=""
+          loading="lazy"
+          aria-hidden="true"
+        />
+      )}
+    </div>
+  </div>
+
+  <div class="week-preview__glance-grid">
+    <article class="week-preview__glance">
+      <p class="week-preview__glance-label">Quiet time</p>
+      <h4>{anchor.bestQuietTime}</h4>
+      <p class="week-preview__glance-detail">{anchor.location}</p>
+    </article>
+    <article class="week-preview__glance week-preview__glance--with-thumb">
+      <div class="week-preview__glance-main">
+        <p class="week-preview__glance-label">Weekend option</p>
+        <h4>{secondary.activityName}</h4>
+        <p class="week-preview__glance-detail">{secondary.location}</p>
+      </div>
+      {secondaryImageSrc && (
+        <img
+          class="week-preview__thumb week-preview__thumb--glance"
+          src={secondaryImageSrc}
+          alt=""
+          loading="lazy"
+          aria-hidden="true"
+        />
+      )}
+    </article>
+  </div>
+
+  <a class="week-preview__link" href={withBase(`/weeks/${week.slug}/`)}>
+    View {week.label.toLowerCase()}
+  </a>
+</section>

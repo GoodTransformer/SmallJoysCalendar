@@ -1,0 +1,16 @@
+---
+import type { Category } from '../data/calendar';
+import { withBase } from '../lib/utils';
+
+interface Props {
+  category: Category;
+}
+
+const { category } = Astro.props;
+---
+
+<article class="category-card">
+  <h2>{category.shortTitle}</h2>
+  <p>{category.description}</p>
+  <a href={withBase(`/categories/${category.slug}/`)}>Browse</a>
+</article>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Studio placeholder">
+  <rect width="1200" height="900" fill="#f4eee6"/>
+  <rect x="110" y="170" width="980" height="560" rx="48" fill="#fbf8f4" stroke="#e6ddd3" stroke-width="12"/>
+  <circle cx="360" cy="430" r="110" fill="#d8e4e2"/>
+  <circle cx="610" cy="470" r="88" fill="#e6d4ce"/>
+  <circle cx="835" cy="420" r="124" fill="#d9ddd0"/>
+</svg>

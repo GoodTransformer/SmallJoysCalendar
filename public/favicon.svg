@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Small Joys Calendar favicon">
+  <rect width="64" height="64" rx="18" fill="#f2ece3"/>
+  <path d="M20 18h24a4 4 0 0 1 4 4v22c0 2.2-1.8 4-4 4H20a4 4 0 0 1-4-4V22c0-2.2 1.8-4 4-4Z" fill="#ffffff" stroke="#7e9d9e" stroke-width="2"/>
+  <path d="M16 26h32" stroke="#7e9d9e" stroke-width="2"/>
+  <circle cx="24" cy="34" r="4" fill="#d9c6be"/>
+  <circle cx="40" cy="34" r="4" fill="#dbe8e7"/>
+  <path d="M24 14v8M40 14v8" stroke="#586358" stroke-linecap="round" stroke-width="3"/>
+</svg>

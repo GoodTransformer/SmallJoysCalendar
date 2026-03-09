@@ -1,0 +1,77 @@
+---
+import type { Activity, PairedOuting } from '../data/calendar';
+import { getActivityHref, withBase } from '../lib/utils';
+
+interface Props {
+  item: PairedOuting;
+  activities: Activity[];
+}
+
+const { item, activities } = Astro.props;
+const visibleActivities = activities.slice(0, 2);
+const stepLabels =
+  item.format === 'split-across-days'
+    ? ['Midweek', 'Weekend']
+    : ['Start with', 'Then'];
+---
+
+<article class="pair-card">
+  <div class:list={['pair-card__images', visibleActivities.length === 1 && 'pair-card__images--single']}>
+    {visibleActivities.map((activity) => (
+      <div class="pair-card__image-wrap">
+        {activity.image?.src ? (
+          <a class="pair-card__image-link" href={getActivityHref(activity.id)} aria-label={`Open ${activity.activityName}`}>
+            <img
+              class="pair-card__image"
+              src={withBase(activity.image.src)}
+              alt={activity.image?.alt ?? ''}
+              loading="lazy"
+            />
+          </a>
+        ) : (
+          <div class="pair-card__image pair-card__image--empty" aria-hidden="true"></div>
+        )}
+        <span class="pair-card__image-label">{activity.activityName}</span>
+      </div>
+    ))}
+  </div>
+
+  <div class="pair-card__body">
+    <div class="pair-card__topline">
+      <p class="pair-card__eyebrow">
+        {item.format === 'split-across-days' ? 'Across the week' : 'Same day'}
+      </p>
+      <span class="pair-card__chip">
+        {visibleActivities.length === 2 ? 'Two steps' : 'Single anchor'}
+      </span>
+    </div>
+
+    <h3>{item.title}</h3>
+    <p class="pair-card__description">{item.description}</p>
+
+    <ol class="pair-card__steps">
+      {visibleActivities.map((activity, index) => (
+        <li class="pair-card__step">
+          <p class="pair-card__step-label">{stepLabels[index] ?? 'Then'}</p>
+          <p class="pair-card__step-title">{activity.activityName}</p>
+          <p class="pair-card__step-detail">{activity.location}</p>
+        </li>
+      ))}
+    </ol>
+
+    {item.whyItWorks && (
+      <div class="pair-card__why">
+        <p class="pair-card__why-label">Why it works</p>
+        <p>{item.whyItWorks}</p>
+      </div>
+    )}
+
+    {item.link && item.linkLabel && (
+      <p class="pair-card__link">
+        <a href={item.link} target="_blank" rel="noreferrer">
+          {item.linkLabel}
+        </a>
+      </p>
+    )}
+  </div>
+</article>

@@ -1,0 +1,49 @@
+{
+  "placeholders": [
+    {
+      "id": "coast",
+      "file": "/images/placeholders/coast.svg",
+      "bestFor": "Sea, shoreline, sauna, horizon, windy reset"
+    },
+    {
+      "id": "garden",
+      "file": "/images/placeholders/garden.svg",
+      "bestFor": "Gardens, flowers, quiet café wandering"
+    },
+    {
+      "id": "studio",
+      "file": "/images/placeholders/studio.svg",
+      "bestFor": "Pottery, workshops, making, creative classes"
+    },
+    {
+      "id": "food",
+      "file": "/images/placeholders/food.svg",
+      "bestFor": "Lunches, dinner dates, cafés, treats"
+    },
+    {
+      "id": "spa",
+      "file": "/images/placeholders/spa.svg",
+      "bestFor": "Massage, facials, sound sessions, downshift moments"
+    },
+    {
+      "id": "water",
+      "file": "/images/placeholders/water.svg",
+      "bestFor": "Paddling, broadside calm, watery stillness"
+    },
+    {
+      "id": "nature",
+      "file": "/images/placeholders/nature.svg",
+      "bestFor": "Estates, parks, wildlife, expansive walks"
+    },
+    {
+      "id": "animal",
+      "file": "/images/placeholders/animal.svg",
+      "bestFor": "Alpacas and animal-based comfort"
+    }
+  ],
+  "replacementPattern": {
+    "step1": "Add a new image to public/images/venues/",
+    "step2": "Update the activity image src in src/data/activity-images.json",
+    "step3": "Replace the alt text with a plain description of the scene"
+  }
+}

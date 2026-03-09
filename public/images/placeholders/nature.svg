@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Nature placeholder">
+  <rect width="1200" height="900" fill="#f4f0e8"/>
+  <circle cx="180" cy="250" r="120" fill="#dfe9df"/>
+  <circle cx="940" cy="220" r="160" fill="#d6e4e3"/>
+  <path d="M0 620C143 560 270 560 401 603s282 44 422 2 235-57 377 17v278H0Z" fill="#b6c7b4"/>
+  <path d="M500 320c48 0 87 37 87 84 0 62-87 164-87 164s-87-102-87-164c0-47 39-84 87-84Z" fill="#d7ccc0"/>
+</svg>

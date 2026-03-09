@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Water placeholder">
+  <rect width="1200" height="900" fill="#eff3f1"/>
+  <rect width="1200" height="280" fill="#dbe8e7"/>
+  <path d="M0 380C141 350 255 360 382 382s293 30 431 10 248-28 387 9v519H0Z" fill="#a8c3c5"/>
+  <path d="M0 520C146 492 238 500 358 525s271 34 435 8 276-25 407 9v356H0Z" fill="#d9e5e4"/>
+</svg>

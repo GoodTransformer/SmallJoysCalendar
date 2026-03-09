@@ -1,0 +1,19 @@
+---
+import { calendar } from '../data/calendar';
+import { withBase } from '../lib/utils';
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div>
+      <p class="site-footer__title">{calendar.site.title}</p>
+      <p class="site-footer__text">
+        A calm set of ideas for the weeks ahead.
+      </p>
+    </div>
+    <div class="site-footer__links">
+      <a href={withBase('/')}>12-week arc</a>
+      <a href={withBase('/categories/')}>Idea categories</a>
+    </div>
+  </div>
+</footer>

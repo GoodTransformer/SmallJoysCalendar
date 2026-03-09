@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TagPills from '../../components/TagPills.astro';
+import type { Activity } from '../../data/calendar';
+import { calendar } from '../../data/calendar';
+import { getActivityMapsTarget, getGoogleMapsSearchHref, withBase } from '../../lib/utils';
+
+export function getStaticPaths() {
+  return calendar.activities.map((activity) => ({
+    params: { slug: activity.id },
+    props: { activity }
+  }));
+}
+
+const { activity } = Astro.props as { activity: Activity };
+const imageSrc = activity.image?.src ? withBase(activity.image.src) : undefined;
+const googleMapsHref = getGoogleMapsSearchHref(getActivityMapsTarget(activity.venueName, activity.location));
+const relatedWeeks = calendar.weeks.filter(
+  (week) => week.anchorActivityId === activity.id || week.secondActivityId === activity.id
+);
+const relatedCategories = calendar.categories.filter((category) => category.activityIds.includes(activity.id));
+const detailFacts = [
+  { label: 'Venue', value: activity.venueName },
+  { label: 'Location', value: activity.location },
+  { label: 'Drive time', value: activity.driveTimeFromMarsham },
+  { label: 'Quietest time', value: activity.bestQuietTime },
+  { label: 'Timing fit', value: activity.timingFit },
+  { label: 'Dog-friendly', value: activity.dogFriendly },
+  { label: 'Estimated spend', value: activity.estimatedCost },
+  { label: 'Best with', value: activity.soloFriendBoyfriendFit },
+  { label: 'Crowd level', value: activity.likelyCrowdLevel },
+  { label: 'Booking', value: activity.bookingNeeded }
+];
+const backHref = relatedWeeks[0]
+  ? withBase(`/weeks/${relatedWeeks[0].slug}/`)
+  : withBase('/');
+const backLabel = relatedWeeks[0]
+  ? `Back to ${relatedWeeks[0].label.toLowerCase()}`
+  : 'Back to the full arc';
+---
+
+<BaseLayout title={activity.activityName} description={activity.whyItSuitsHer}>
+  <section class="panel">
+    <div class="activity-page__header">
+      <div class="activity-page__media">
+        {imageSrc ? (
+          <img
+            class="activity-page__image"
+            src={imageSrc}
+            alt={activity.image?.alt ?? ''}
+            loading="eager"
+          />
+        ) : (
+          <div class="activity-page__image activity-page__image--empty" aria-hidden="true"></div>
+        )}
+      </div>
+
+      <div class="activity-page__intro">
+        <h1 class="week-page__headline">{activity.activityName}</h1>
+        <p class="activity-page__venue">{activity.venueName}</p>
+        <p class="week-page__lede">{activity.whyItSuitsHer}</p>
+        <TagPills tags={activity.tags} />
+
+        <div class="activity-page__link-row">
+          <a class="button-link" href={activity.bookingLink} target="_blank" rel="noreferrer">
+            Source
+          </a>
+          <a class="button-link button-link--soft" href={googleMapsHref} target="_blank" rel="noreferrer">
+            Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="activity-page__facts">
+      {detailFacts.map((item) => (
+        <article class="activity-page__fact">
+          <p class="activity-page__fact-label">{item.label}</p>
+          <p class="activity-page__fact-value">{item.value}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="activity-page__notes">
+      <article class="callout">
+        <h2>Why it fits</h2>
+        <p>{activity.whyThisMightHelpThisWeek}</p>
+        {activity.notes && <p>{activity.notes}</p>}
+      </article>
+
+      <article class="callout">
+        <h2>In the calendar</h2>
+        <div class="activity-page__context-block">
+          <p class="activity-page__context-label">Weeks</p>
+          <div class="activity-page__context-links">
+            {relatedWeeks.map((week) => (
+              <a href={withBase(`/weeks/${week.slug}/`)}>
+                {week.label} · {week.shortDateRange}
+              </a>
+            ))}
+          </div>
+        </div>
+        <div class="activity-page__context-block">
+          <p class="activity-page__context-label">Categories</p>
+          <div class="activity-page__context-links">
+            {relatedCategories.map((category) => (
+              <a href={withBase(`/categories/${category.slug}/`)}>
+                {category.shortTitle}
+              </a>
+            ))}
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-block">
+    <p>
+      <a class="button-link" href={backHref}>{backLabel}</a>
+    </p>
+  </section>
+</BaseLayout>

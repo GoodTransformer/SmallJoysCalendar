@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Coastal placeholder">
+  <rect width="1200" height="900" fill="#f3ede5"/>
+  <rect width="1200" height="360" fill="#dae7e6"/>
+  <rect y="360" width="1200" height="540" fill="#e8ddd0"/>
+  <path d="M0 475C150 430 250 438 400 470S700 518 900 470s210-37 300 2V900H0Z" fill="#b8cccc"/>
+  <path d="M0 600C210 560 320 585 520 620s365 30 680-22V900H0Z" fill="#f6f1ea"/>
+</svg>

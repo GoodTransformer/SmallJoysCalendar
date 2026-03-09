@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Garden placeholder">
+  <rect width="1200" height="900" fill="#f7f1ea"/>
+  <circle cx="280" cy="280" r="170" fill="#e7d5cf"/>
+  <circle cx="910" cy="230" r="130" fill="#dce8de"/>
+  <circle cx="700" cy="560" r="220" fill="#d7e5e4"/>
+  <path d="M0 690C150 620 270 610 410 650s260 47 380 5 240-48 410 35v210H0Z" fill="#c6d6c4"/>
+</svg>

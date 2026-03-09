@@ -1,0 +1,16 @@
+---
+interface Props {
+  current: number;
+  total: number;
+}
+
+const { current, total } = Astro.props;
+---
+
+<div class="progress-dots" aria-label={`Week ${current} of ${total}`}>
+  <div class="progress-dots__track" aria-hidden="true">
+    {Array.from({ length: total }, (_, index) => (
+      <span class:list={['progress-dots__dot', index + 1 <= current && 'is-active']} />
+    ))}
+  </div>
+</div>

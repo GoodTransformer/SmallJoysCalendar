@@ -1,0 +1,18 @@
+---
+import { withBase } from '../lib/utils';
+---
+
+<header class="site-header">
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="site-header__inner">
+    <a class="site-brand" href={withBase('/')}>
+      <span class="site-brand__eyebrow">Small Joys</span>
+      <span class="site-brand__name">Twelve gentle weeks</span>
+    </a>
+
+    <nav aria-label="Primary" class="site-nav">
+      <a href={withBase('/')}>Home</a>
+      <a href={withBase('/categories/')}>Categories</a>
+    </nav>
+  </div>
+</header>

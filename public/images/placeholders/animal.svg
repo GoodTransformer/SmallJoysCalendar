@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Animal placeholder">
+  <rect width="1200" height="900" fill="#f6f0e8"/>
+  <path d="M0 640C153 596 291 601 445 640s275 48 440 11 214-50 315 8v241H0Z" fill="#d0ddcf"/>
+  <path d="M520 410c0-93 69-160 162-160s160 67 160 160v143H520Z" fill="#d9c9bc"/>
+  <circle cx="592" cy="364" r="30" fill="#d9c9bc"/>
+  <circle cx="770" cy="364" r="30" fill="#d9c9bc"/>
+  <rect x="610" y="515" width="26" height="136" rx="12" fill="#b38f7d"/>
+  <rect x="726" y="515" width="26" height="136" rx="12" fill="#b38f7d"/>
+</svg>

@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ActivityCard from '../../components/ActivityCard.astro';
+import ProgressDots from '../../components/ProgressDots.astro';
+import { calendar, getActivity } from '../../data/calendar';
+import { withBase } from '../../lib/utils';
+
+export function getStaticPaths() {
+  return calendar.weeks.map((week) => ({
+    params: { slug: week.slug },
+    props: { week }
+  }));
+}
+
+const { week } = Astro.props;
+const weekIndex = calendar.weeks.findIndex((entry) => entry.slug === week.slug);
+const anchor = getActivity(week.anchorActivityId);
+const secondary = getActivity(week.secondActivityId);
+---
+
+<BaseLayout title={`${week.label} · ${week.dateRange}`} description={week.summary}>
+  <section class="panel">
+    <div class="week-page__header">
+      <div>
+        <p class="section-heading__eyebrow">{week.label}</p>
+        <h1 class="week-page__headline">{week.dateRange}</h1>
+        <p class="week-page__lede">{week.summary}</p>
+      </div>
+      <ProgressDots current={weekIndex + 1} total={calendar.weeks.length} />
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="week-page__cards">
+      <ActivityCard activity={anchor} cardTitle={week.anchorLabel} featured={true} />
+      <ActivityCard activity={secondary} cardTitle={week.secondLabel} featured={true} />
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="callout">
+      <p class="section-heading__eyebrow">Navigation</p>
+      <h2>Keep the next step light</h2>
+      <p>
+        If this week does not feel right, jump sideways into a calmer category or back to the full arc.
+      </p>
+      <p>
+        <a class="button-link" href={withBase('/categories/')}>Browse categories</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

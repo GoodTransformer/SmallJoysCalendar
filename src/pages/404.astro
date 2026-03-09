@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/utils';
+---
+
+<BaseLayout title="Page not found" description="This page could not be found.">
+  <section class="callout">
+    <p class="section-heading__eyebrow">Not found</p>
+    <h1 class="week-page__headline">This page is not here.</h1>
+    <p>The link may be out of date, or the page may have been renamed while the calendar was being edited.</p>
+    <p><a class="button-link" href={withBase('/')}>Return home</a></p>
+  </section>
+</BaseLayout>

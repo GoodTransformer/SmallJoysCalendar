@@ -1,0 +1,107 @@
+---
+import type { Activity } from '../data/calendar';
+import { getActivityHref, getActivityMapsTarget, getGoogleMapsSearchHref, withBase } from '../lib/utils';
+import TagPills from './TagPills.astro';
+
+interface Props {
+  activity: Activity;
+  cardTitle?: string;
+  featured?: boolean;
+}
+
+const { activity, cardTitle, featured = false } = Astro.props;
+const imageSrc = activity.image?.src ? withBase(activity.image.src) : undefined;
+const isPlaceholderImage = activity.image?.src?.includes('/images/placeholders/');
+const activityHref = getActivityHref(activity.id);
+const googleMapsHref = getGoogleMapsSearchHref(getActivityMapsTarget(activity.venueName, activity.location));
+const keyFacts = [
+  { label: 'Venue', value: activity.venueName },
+  { label: 'Quiet time', value: activity.bestQuietTime },
+  { label: 'Spend', value: activity.estimatedCost },
+  { label: 'Best with', value: activity.soloFriendBoyfriendFit }
+];
+---
+
+<article class:list={['activity-card', featured && 'activity-card--featured']}>
+  <div class="activity-card__image-wrap">
+    {imageSrc ? (
+      <a class="activity-card__image-link" href={activityHref} aria-label={`Open ${activity.activityName}`}>
+        <img
+          class:list={['activity-card__image', isPlaceholderImage && 'activity-card__image--placeholder']}
+          src={imageSrc}
+          alt={activity.image?.alt ?? ''}
+          loading="lazy"
+        />
+      </a>
+    ) : (
+      <div class="activity-card__image activity-card__image--empty" aria-hidden="true"></div>
+    )}
+    {cardTitle && <span class="activity-card__eyebrow">{cardTitle}</span>}
+  </div>
+
+  <div class="activity-card__body">
+    <h3 class="activity-card__title">{activity.activityName}</h3>
+
+    <TagPills tags={activity.tags} />
+
+    <dl class="activity-card__facts">
+      {keyFacts.map((item) => (
+        <div class="activity-card__fact">
+          <dt>{item.label}</dt>
+          <dd>{item.value}</dd>
+        </div>
+      ))}
+    </dl>
+
+    <div class="activity-card__reflection">
+      <p class="activity-card__reflection-label">Why it fits</p>
+      <p>{activity.whyThisMightHelpThisWeek}</p>
+    </div>
+
+    <div class="activity-card__footer">
+      <div class="activity-card__footer-item">
+        <p class="activity-card__source-label">Source</p>
+        <a href={activity.bookingLink} target="_blank" rel="noreferrer">
+          {activity.sourceName}
+        </a>
+      </div>
+      <div class="activity-card__footer-item">
+        <p class="activity-card__source-label">Google Maps</p>
+        <a href={googleMapsHref} target="_blank" rel="noreferrer">
+          Open map
+        </a>
+      </div>
+    </div>
+
+    <details class="activity-card__details">
+      <summary>More details</summary>
+      <dl class="activity-card__meta">
+        <div>
+          <dt>Location</dt>
+          <dd>{activity.location}</dd>
+        </div>
+        <div>
+          <dt>Drive time</dt>
+          <dd>{activity.driveTimeFromMarsham}</dd>
+        </div>
+        <div>
+          <dt>Timing fit</dt>
+          <dd>{activity.timingFit}</dd>
+        </div>
+        <div>
+          <dt>Dog-friendly</dt>
+          <dd>{activity.dogFriendly}</dd>
+        </div>
+        <div>
+          <dt>Crowd level</dt>
+          <dd>{activity.likelyCrowdLevel}</dd>
+        </div>
+        <div>
+          <dt>Booking</dt>
+          <dd>{activity.bookingNeeded}</dd>
+        </div>
+      </dl>
+      {activity.notes && <p class="activity-card__note">{activity.notes}</p>}
+    </details>
+  </div>
+</article>

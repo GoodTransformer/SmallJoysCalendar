@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Food placeholder">
+  <rect width="1200" height="900" fill="#f5ede4"/>
+  <rect x="96" y="104" width="1008" height="692" rx="40" fill="#fffaf4"/>
+  <circle cx="600" cy="470" r="210" fill="#e6d3c7"/>
+  <circle cx="600" cy="470" r="130" fill="#dbe8e7"/>
+  <circle cx="910" cy="290" r="70" fill="#eadad4"/>
+</svg>

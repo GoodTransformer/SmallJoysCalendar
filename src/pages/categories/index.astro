@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ActivityCard from '../../components/ActivityCard.astro';
+import CategoryCard from '../../components/CategoryCard.astro';
+import { calendar } from '../../data/calendar';
+
+const allActivities = calendar.activities;
+---
+
+<BaseLayout title="Categories" description="Browse calm ideas by budget, weather, dog-friendliness, and water-based fit.">
+  <section class="panel">
+    <div class="section-heading">
+      <h1 class="week-page__headline">Browse by mood, logistics, or spend</h1>
+      <p>Browse the same ideas by mood, budget, weather, or company.</p>
+    </div>
+    <div class="category-grid">
+      {calendar.categories.map((category) => (
+        <CategoryCard category={category} />
+      ))}
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="filter-panel">
+      <h2>Filter</h2>
+      <div class="filter-panel__chips">
+        <label class="filter-chip"><input type="checkbox" value="Wednesday" /> Wednesday-friendly</label>
+        <label class="filter-chip"><input type="checkbox" value="weekend" /> Weekend-friendly</label>
+        <label class="filter-chip"><input type="checkbox" value="dog-friendly" /> Dog-friendly</label>
+        <label class="filter-chip"><input type="checkbox" value="indoor" /> Indoor</label>
+        <label class="filter-chip"><input type="checkbox" value="under-£40" /> Under £40</label>
+        <label class="filter-chip"><input type="checkbox" value="around-£80" /> Around £80</label>
+        <label class="filter-chip"><input type="checkbox" value="water" /> Water-based</label>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="section-heading">
+      <h2>All activities</h2>
+    </div>
+
+    <p class="empty-state" data-empty-state hidden>No activities match the selected filters.</p>
+
+    <div class="activity-grid" data-filter-grid>
+      {allActivities.map((activity) => (
+        <div
+          data-activity-card
+          data-tags={activity.tags.join('|').toLowerCase()}
+          data-timing={activity.timingFit.toLowerCase()}
+          data-dog={activity.dogFriendly.toLowerCase()}
+          data-indoor={String(activity.indoor)}
+          data-price={activity.priceBand}
+          data-water={String(activity.waterBased)}
+        >
+          <ActivityCard activity={activity} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <script>
+    const checkboxes = Array.from(document.querySelectorAll<HTMLInputElement>('.filter-chip input'));
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-activity-card]'));
+    const emptyState = document.querySelector<HTMLElement>('[data-empty-state]');
+
+    const matches = (card: HTMLElement, value: string) => {
+      const tags = card.dataset.tags ?? '';
+      const timing = card.dataset.timing ?? '';
+      const dog = card.dataset.dog ?? '';
+      const indoor = card.dataset.indoor ?? '';
+      const price = card.dataset.price ?? '';
+      const water = card.dataset.water ?? '';
+
+      if (value === 'Wednesday') return timing === 'wednesday' || tags.includes('wednesday');
+      if (value === 'weekend') return timing === 'weekend' || timing === 'either' || tags.includes('weekend');
+      if (value === 'dog-friendly') return dog === 'yes' || tags.includes('dog-friendly');
+      if (value === 'indoor') return indoor === 'true' || tags.includes('indoor');
+      if (value === 'under-£40') return price === 'under-40' || tags.includes('under-£40');
+      if (value === 'around-£80') return price === 'around-80' || tags.includes('around-£80');
+      if (value === 'water') return water === 'true' || tags.includes('water');
+      return true;
+    };
+
+    const update = () => {
+      const active = checkboxes.filter((input) => input.checked).map((input) => input.value);
+      let visibleCount = 0;
+
+      cards.forEach((card) => {
+        const visible = active.every((value) => matches(card, value));
+        card.hidden = !visible;
+        if (visible) visibleCount += 1;
+      });
+
+      if (emptyState) {
+        emptyState.hidden = visibleCount !== 0;
+      }
+    };
+
+    checkboxes.forEach((input) => input.addEventListener('change', update));
+  </script>
+</BaseLayout>
