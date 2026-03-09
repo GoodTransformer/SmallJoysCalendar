@@ -22,15 +22,28 @@ const allActivities = calendar.activities;
 
   <section class="section-block">
     <div class="filter-panel">
-      <h2>Filter</h2>
+      <div class="filter-panel__header">
+        <div>
+          <h2>Filter</h2>
+          <p class="filter-panel__hint">Pick a few tags to narrow the list.</p>
+        </div>
+        <button class="filter-panel__clear" type="button" data-clear-filters hidden>Clear filters</button>
+      </div>
       <div class="filter-panel__chips">
-        <label class="filter-chip"><input type="checkbox" value="Wednesday" /> Wednesday-friendly</label>
-        <label class="filter-chip"><input type="checkbox" value="weekend" /> Weekend-friendly</label>
-        <label class="filter-chip"><input type="checkbox" value="dog-friendly" /> Dog-friendly</label>
-        <label class="filter-chip"><input type="checkbox" value="indoor" /> Indoor</label>
-        <label class="filter-chip"><input type="checkbox" value="under-£40" /> Under £40</label>
-        <label class="filter-chip"><input type="checkbox" value="around-£80" /> Around £80</label>
-        <label class="filter-chip"><input type="checkbox" value="water" /> Water-based</label>
+        <label class="filter-chip"><input type="checkbox" value="wednesday" data-label="Wednesday-friendly" /> Wednesday-friendly</label>
+        <label class="filter-chip"><input type="checkbox" value="weekend" data-label="Weekend-friendly" /> Weekend-friendly</label>
+        <label class="filter-chip"><input type="checkbox" value="dog-friendly" data-label="Dog-friendly" /> Dog-friendly</label>
+        <label class="filter-chip"><input type="checkbox" value="indoor" data-label="Indoor" /> Indoor</label>
+        <label class="filter-chip"><input type="checkbox" value="under-40" data-label="Under £40" /> Under £40</label>
+        <label class="filter-chip"><input type="checkbox" value="around-80" data-label="Around £80" /> Around £80</label>
+        <label class="filter-chip"><input type="checkbox" value="water" data-label="Water-based" /> Water-based</label>
+      </div>
+      <div class="filter-panel__status">
+        <p class="filter-panel__count" data-filter-count>Showing all {allActivities.length} activities.</p>
+        <div class="filter-panel__active" data-active-filters hidden>
+          <p class="filter-panel__active-label">Active filters</p>
+          <div class="filter-panel__active-list" data-active-filter-list></div>
+        </div>
       </div>
     </div>
   </section>
@@ -63,6 +76,13 @@ const allActivities = calendar.activities;
     const checkboxes = Array.from(document.querySelectorAll<HTMLInputElement>('.filter-chip input'));
     const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-activity-card]'));
     const emptyState = document.querySelector<HTMLElement>('[data-empty-state]');
+    const count = document.querySelector<HTMLElement>('[data-filter-count]');
+    const activeFilters = document.querySelector<HTMLElement>('[data-active-filters]');
+    const activeFilterList = document.querySelector<HTMLElement>('[data-active-filter-list]');
+    const clearFilters = document.querySelector<HTMLButtonElement>('[data-clear-filters]');
+    const filterLabels = new Map(
+      checkboxes.map((input) => [input.value, input.dataset.label ?? input.value])
+    );
 
     const matches = (card: HTMLElement, value: string) => {
       const tags = card.dataset.tags ?? '';
@@ -72,12 +92,12 @@ const allActivities = calendar.activities;
       const price = card.dataset.price ?? '';
       const water = card.dataset.water ?? '';
 
-      if (value === 'Wednesday') return timing === 'wednesday' || tags.includes('wednesday');
+      if (value === 'wednesday') return timing === 'wednesday' || tags.includes('wednesday');
       if (value === 'weekend') return timing === 'weekend' || timing === 'either' || tags.includes('weekend');
       if (value === 'dog-friendly') return dog === 'yes' || tags.includes('dog-friendly');
       if (value === 'indoor') return indoor === 'true' || tags.includes('indoor');
-      if (value === 'under-£40') return price === 'under-40' || tags.includes('under-£40');
-      if (value === 'around-£80') return price === 'around-80' || tags.includes('around-£80');
+      if (value === 'under-40') return price === 'under-40' || tags.includes('under-£40');
+      if (value === 'around-80') return price === 'around-80' || tags.includes('around-£80');
       if (value === 'water') return water === 'true' || tags.includes('water');
       return true;
     };
@@ -95,8 +115,53 @@ const allActivities = calendar.activities;
       if (emptyState) {
         emptyState.hidden = visibleCount !== 0;
       }
+
+      if (count) {
+        count.textContent = active.length === 0
+          ? `Showing all ${cards.length} activities.`
+          : `${visibleCount} ${visibleCount === 1 ? 'activity matches' : 'activities match'} the selected filters.`;
+      }
+
+      if (activeFilters && activeFilterList) {
+        activeFilterList.replaceChildren(
+          ...active.map((value) => {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'filter-panel__active-chip';
+            button.dataset.removeFilter = value;
+            button.textContent = `${filterLabels.get(value) ?? value} ×`;
+            return button;
+          })
+        );
+        activeFilters.hidden = active.length === 0;
+      }
+
+      if (clearFilters) {
+        clearFilters.hidden = active.length === 0;
+      }
     };
 
     checkboxes.forEach((input) => input.addEventListener('change', update));
+    activeFilterList?.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLButtonElement)) return;
+
+      const filter = target.dataset.removeFilter;
+      const input = checkboxes.find((item) => item.value === filter);
+
+      if (input) {
+        input.checked = false;
+        update();
+      }
+    });
+
+    clearFilters?.addEventListener('click', () => {
+      checkboxes.forEach((input) => {
+        input.checked = false;
+      });
+      update();
+    });
+
+    update();
   </script>
 </BaseLayout>

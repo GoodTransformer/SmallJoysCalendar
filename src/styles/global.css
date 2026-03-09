@@ -1192,6 +1192,16 @@ a:focus-visible {
   border-radius: var(--radius-lg);
 }
 
+.filter-panel__header,
+.filter-panel__status {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.filter-panel__header {
+  align-items: start;
+}
+
 .filter-panel h2,
 .filter-panel p {
   margin: 0;
@@ -1211,9 +1221,54 @@ a:focus-visible {
   accent-color: #6f8f90;
 }
 
+.filter-panel__count,
 .filter-panel__hint,
 .empty-state {
   color: var(--ink-faint);
+}
+
+.filter-panel__active {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.filter-panel__active-label {
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.filter-panel__active-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-panel__active-chip,
+.filter-panel__clear {
+  appearance: none;
+  border: 1px solid rgba(126, 157, 158, 0.24);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+}
+
+.filter-panel__active-chip {
+  padding: 0.45rem 0.8rem;
+}
+
+.filter-panel__clear {
+  justify-self: start;
+  padding: 0.6rem 0.95rem;
+}
+
+.filter-panel__active[hidden],
+.filter-panel__clear[hidden] {
+  display: none;
 }
 
 .callout {
@@ -1372,6 +1427,11 @@ a:focus-visible {
 
   .filter-panel__chips {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .filter-panel__header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
   }
 }
 
