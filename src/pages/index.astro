@@ -55,12 +55,20 @@ const highlights = highlightIds.map((id) => {
     imageSrc: activity.image?.src ? withBase(activity.image.src) : undefined
   };
 });
+const heroImageSrc = withBase('/images/venues/salhouse-broad-paddle.jpg');
 ---
 
 <BaseLayout title="Home" description={calendar.site.description}>
   <section class="hero">
+    <img
+      class="hero__background"
+      src={heroImageSrc}
+      alt=""
+      loading="eager"
+      aria-hidden="true"
+    />
     <div class="hero__grid">
-      <div>
+      <div class="hero__content">
         <p class="hero__eyebrow">For {calendar.site.recipientName ?? 'Rhi'}</p>
         <p class="hero__context">Gentle, low-pressure, dog-friendly</p>
         <h1>{calendar.site.title}</h1>
