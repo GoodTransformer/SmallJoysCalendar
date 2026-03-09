@@ -1,6 +1,6 @@
 ---
 import type { Activity, Week } from '../data/calendar';
-import { withBase } from '../lib/utils';
+import { getActivityHref, withBase } from '../lib/utils';
 import ProgressDots from './ProgressDots.astro';
 import TagPills from './TagPills.astro';
 
@@ -15,6 +15,8 @@ interface Props {
 const { week, anchor, secondary, weekNumber, totalWeeks } = Astro.props;
 const anchorImageSrc = anchor.image?.src ? withBase(anchor.image.src) : undefined;
 const secondaryImageSrc = secondary.image?.src ? withBase(secondary.image.src) : undefined;
+const anchorHref = getActivityHref(anchor.id);
+const secondaryHref = getActivityHref(secondary.id);
 ---
 
 <section class="week-preview" id={week.id}>
@@ -35,13 +37,14 @@ const secondaryImageSrc = secondary.image?.src ? withBase(secondary.image.src) :
         <TagPills tags={anchor.tags.slice(0, 3)} />
       </div>
       {anchorImageSrc && (
-        <img
-          class="week-preview__thumb week-preview__thumb--anchor"
-          src={anchorImageSrc}
-          alt=""
-          loading="lazy"
-          aria-hidden="true"
-        />
+        <a class="week-preview__thumb-link" href={anchorHref} aria-label={`Open ${anchor.activityName}`}>
+          <img
+            class="week-preview__thumb week-preview__thumb--anchor"
+            src={anchorImageSrc}
+            alt={anchor.image?.alt ?? ''}
+            loading="lazy"
+          />
+        </a>
       )}
     </div>
   </div>
@@ -59,13 +62,14 @@ const secondaryImageSrc = secondary.image?.src ? withBase(secondary.image.src) :
         <p class="week-preview__glance-detail">{secondary.location}</p>
       </div>
       {secondaryImageSrc && (
-        <img
-          class="week-preview__thumb week-preview__thumb--glance"
-          src={secondaryImageSrc}
-          alt=""
-          loading="lazy"
-          aria-hidden="true"
-        />
+        <a class="week-preview__thumb-link" href={secondaryHref} aria-label={`Open ${secondary.activityName}`}>
+          <img
+            class="week-preview__thumb week-preview__thumb--glance"
+            src={secondaryImageSrc}
+            alt={secondary.image?.alt ?? ''}
+            loading="lazy"
+          />
+        </a>
       )}
     </article>
   </div>

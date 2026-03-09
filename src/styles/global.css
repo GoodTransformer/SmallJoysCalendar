@@ -764,6 +764,11 @@ a:focus-visible {
   margin: 0;
 }
 
+.week-preview__thumb-link {
+  display: block;
+  align-self: start;
+}
+
 .week-preview__thumb {
   width: 5rem;
   aspect-ratio: 1 / 1;
@@ -772,6 +777,12 @@ a:focus-visible {
   border: 1px solid rgba(255, 255, 255, 0.72);
   box-shadow: var(--shadow-soft);
   background: linear-gradient(180deg, rgba(234, 239, 236, 0.7), rgba(232, 223, 209, 0.7));
+}
+
+.week-preview__thumb-link:hover .week-preview__thumb,
+.week-preview__thumb-link:focus-visible .week-preview__thumb {
+  transform: scale(1.02);
+  filter: saturate(1.04);
 }
 
 .week-preview__thumb--glance {
