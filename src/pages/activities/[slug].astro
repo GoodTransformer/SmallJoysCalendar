@@ -50,12 +50,20 @@ const backLabel = relatedWeeks[0]
     <div class="activity-page__header">
       <div class="activity-page__media">
         {imageSrc ? (
-          <img
-            class="activity-page__image"
-            src={imageSrc}
-            alt={activity.image?.alt ?? ''}
-            loading="eager"
-          />
+          <a
+            class="activity-page__image-link"
+            href={activity.bookingLink}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`Open ${activity.activityName} source page`}
+          >
+            <img
+              class="activity-page__image"
+              src={imageSrc}
+              alt={activity.image?.alt ?? ''}
+              loading="eager"
+            />
+          </a>
         ) : (
           <div class="activity-page__image activity-page__image--empty" aria-hidden="true"></div>
         )}
